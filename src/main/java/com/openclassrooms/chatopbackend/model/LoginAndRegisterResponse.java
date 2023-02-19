@@ -6,7 +6,6 @@ import lombok.Data;
 public class LoginAndRegisterResponse {
     private String token;
 
-    public LoginAndRegisterResponse(){}
     public LoginAndRegisterResponse(String token){
         this.token = token;
     }

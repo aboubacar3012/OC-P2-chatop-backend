@@ -7,6 +7,8 @@ import com.openclassrooms.chatopbackend.model.LoginRequest;
 import com.openclassrooms.chatopbackend.model.LoginAndRegisterResponse;
 import com.openclassrooms.chatopbackend.model.User;
 import com.openclassrooms.chatopbackend.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@Api("Api pour l'authentification")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -32,6 +35,7 @@ public class AuthController {
     @Autowired
     JwtTokenUtil jwtTokenUtil;
 
+    @ApiOperation(value = "permet de connecter un utilisateur grace a son email et mot de passe")
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid LoginRequest request) {
         try {
