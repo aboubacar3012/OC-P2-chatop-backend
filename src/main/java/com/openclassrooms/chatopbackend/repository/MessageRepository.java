@@ -1,6 +1,6 @@
 package com.openclassrooms.chatopbackend.repository;
 
-import com.openclassrooms.chatopbackend.model.message.Message;
+import com.openclassrooms.chatopbackend.model.Message;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

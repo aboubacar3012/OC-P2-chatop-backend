@@ -1,7 +1,7 @@
 package com.openclassrooms.chatopbackend.controller;
 
-import com.openclassrooms.chatopbackend.model.rental.Rental;
-import com.openclassrooms.chatopbackend.model.user.User;
+import com.openclassrooms.chatopbackend.model.Rental;
+import com.openclassrooms.chatopbackend.model.User;
 import com.openclassrooms.chatopbackend.service.RentalService;
 import com.openclassrooms.chatopbackend.service.StorageService;
 import com.openclassrooms.chatopbackend.service.UserService;

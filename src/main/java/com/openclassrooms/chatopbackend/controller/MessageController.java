@@ -1,6 +1,6 @@
 package com.openclassrooms.chatopbackend.controller;
 
-import com.openclassrooms.chatopbackend.model.message.Message;
+import com.openclassrooms.chatopbackend.model.Message;
 import com.openclassrooms.chatopbackend.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

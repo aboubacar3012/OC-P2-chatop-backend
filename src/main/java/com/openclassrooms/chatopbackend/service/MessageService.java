@@ -1,6 +1,6 @@
 package com.openclassrooms.chatopbackend.service;
 
-import com.openclassrooms.chatopbackend.model.message.Message;
+import com.openclassrooms.chatopbackend.model.Message;
 import com.openclassrooms.chatopbackend.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

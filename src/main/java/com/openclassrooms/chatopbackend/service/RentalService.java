@@ -1,6 +1,6 @@
 package com.openclassrooms.chatopbackend.service;
 
-import com.openclassrooms.chatopbackend.model.rental.Rental;
+import com.openclassrooms.chatopbackend.model.Rental;
 import com.openclassrooms.chatopbackend.repository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
