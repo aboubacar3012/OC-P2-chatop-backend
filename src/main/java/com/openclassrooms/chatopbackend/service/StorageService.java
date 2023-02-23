@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -32,7 +33,6 @@ public class StorageService {
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
         if(estExtensionImageValide(fileName)){
             amazonS3.putObject(new PutObjectRequest(bucketName, fileName, fileObj));
-            fileObj.delete();
             return fileName;
         }
         return null;
@@ -41,7 +41,7 @@ public class StorageService {
 
 
     private File convertMultiPartFileToFile(MultipartFile file) throws FileNotFoundException {
-        File convertedFile = new File(file.getOriginalFilename());
+        File convertedFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
         try (FileOutputStream fos = new FileOutputStream(convertedFile)){
             fos.write(file.getBytes());
         }catch (IOException e){
