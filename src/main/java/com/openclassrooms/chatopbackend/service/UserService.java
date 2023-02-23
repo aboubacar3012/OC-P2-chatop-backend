@@ -36,14 +36,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Optional<User> findUserByEmail(String email){
-        return userRepository.findByEmail(email);
-    }
-
-    public List<User> getAllUsers(){
-        return (List<User>) userRepository.findAll();
-    }
-
     public ResponseEntity<?> getUserById(int id){
         Optional<User> user = userRepository.findById(id);
         if(user.isPresent()){

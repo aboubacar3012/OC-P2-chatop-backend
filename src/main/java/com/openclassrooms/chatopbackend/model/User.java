@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -31,7 +33,6 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private LocalDate updatedAt = LocalDate.now();
 
-    public User() {}
     public User(String name, String email, String password){
         this.name = name;
         this.email = email;

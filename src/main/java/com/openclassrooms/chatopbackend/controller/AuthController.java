@@ -64,7 +64,7 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody @Valid User user){
         try{
             User savedUser = userService.register(user);
-            String token = jwtTokenUtil.generateAccessToken(user);
+            String token = jwtTokenUtil.generateAccessToken(savedUser);
             LoginAndRegisterResponse response = new LoginAndRegisterResponse(token);
             return ResponseEntity.ok().body(response);
 

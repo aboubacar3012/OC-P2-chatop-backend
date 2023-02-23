@@ -23,9 +23,12 @@ public class Rental {
 
     private String description;
 
-    private int owner_id;
+    @Column(name = "owner_id")
+    private int ownerId;
 
-    private LocalDate created_at = LocalDate.now();
+    @Column(name = "created_at")
+    private LocalDate createdAt = LocalDate.now();
 
-    private LocalDate updated_at = LocalDate.now();
+    @Column(name = "updated_at")
+    private LocalDate updatedAt = LocalDate.now();
 }

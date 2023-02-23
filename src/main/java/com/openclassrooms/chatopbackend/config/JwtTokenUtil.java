@@ -48,6 +48,7 @@ public class JwtTokenUtil {
         return false;
     }
 
+    // Permet de decrypter le token afin de recuperer les informations
     public String getSubject(String token) {
         return parseClaims(token).getSubject();
     }

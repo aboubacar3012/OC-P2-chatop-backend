@@ -44,10 +44,6 @@ public class RentalController {
         return rentalService.getById(id);
     }
 
-//    @PostMapping(value = "")
-//    public ResponseEntity<?> create(@RequestBody @Valid Rental rental){
-//        return rentalService.create(rental);
-//    }
 
     @PostMapping(value = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> create(
@@ -65,7 +61,7 @@ public class RentalController {
         rental.setSurface(surface);
         rental.setPrice(price);
         rental.setDescription(description);
-        rental.setOwner_id(connectedUser.get().getId());
+        rental.setOwnerId(connectedUser.get().getId());
 
         String storedImage = storageService.uploadFile(picture);
         if(storedImage != null){

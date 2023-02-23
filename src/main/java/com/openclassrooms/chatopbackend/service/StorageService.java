@@ -30,10 +30,11 @@ public class StorageService {
 
         File fileObj = convertMultiPartFileToFile(file);
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-        amazonS3.putObject(new PutObjectRequest(bucketName, fileName, fileObj));
-        fileObj.delete();
-        if(estExtensionImageValide(fileName))
+        if(estExtensionImageValide(fileName)){
+            amazonS3.putObject(new PutObjectRequest(bucketName, fileName, fileObj));
+            fileObj.delete();
             return fileName;
+        }
         return null;
     }
 
