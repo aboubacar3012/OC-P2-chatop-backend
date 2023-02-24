@@ -27,11 +27,11 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
 
-    @Column(name = "created_at")
-    private LocalDate createdAt = LocalDate.now();
 
-    @Column(name = "updated_at")
-    private LocalDate updatedAt = LocalDate.now();
+    private LocalDate created_at = LocalDate.now();
+
+
+    private LocalDate updated_at = LocalDate.now();
 
     public User(String name, String email, String password){
         this.name = name;

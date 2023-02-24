@@ -33,6 +33,7 @@ public class StorageService {
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
         if(estExtensionImageValide(fileName)){
             amazonS3.putObject(new PutObjectRequest(bucketName, fileName, fileObj));
+            fileObj.delete();
             return fileName;
         }
         return null;

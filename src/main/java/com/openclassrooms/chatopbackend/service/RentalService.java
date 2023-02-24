@@ -60,13 +60,13 @@ public class RentalService {
                if(rental.getSurface() != 0){
                     _rental.setSurface(rental.getSurface());
                }
-               if(rental.getOwnerId() != 0){
-                    _rental.setOwnerId(rental.getOwnerId());
+               if(rental.getOwner_id() != 0){
+                    _rental.setOwner_id(rental.getOwner_id());
                }
 //               if(rental.getPicture() != null){
 //                    _rental.setPicture(rental.getPicture());
 //               }
-               _rental.setUpdatedAt(LocalDate.now());
+               _rental.setUpdated_at(LocalDate.now());
 
                rentalRepository.save(_rental);
 

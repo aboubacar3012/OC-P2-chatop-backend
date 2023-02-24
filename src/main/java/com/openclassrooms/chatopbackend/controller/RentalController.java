@@ -61,7 +61,7 @@ public class RentalController {
         rental.setSurface(surface);
         rental.setPrice(price);
         rental.setDescription(description);
-        rental.setOwnerId(connectedUser.get().getId());
+        rental.setOwner_id(connectedUser.get().getId());
 
         String storedImage = storageService.uploadFile(picture);
         if(storedImage != null){
