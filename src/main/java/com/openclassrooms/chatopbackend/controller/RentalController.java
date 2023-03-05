@@ -8,6 +8,7 @@ import com.openclassrooms.chatopbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -36,12 +38,28 @@ public class RentalController {
 
     @GetMapping("")
     public ResponseEntity<?> getAll(){
-        return rentalService.getAll();
+       try{
+           Map<String, List<Rental>> rentals = rentalService.getAll();
+           return ResponseEntity.ok().body(rentals);
+       }catch(Exception e){
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+       }
     }
 
     @GetMapping("/{id}")
-    public Optional<Rental> getById(@PathVariable("id") int id){
-        return rentalService.getById(id);
+    public ResponseEntity<?> getById(@PathVariable("id") int id){
+        try {
+            Rental rental = rentalService.getById(id);
+            if(rental != null){
+                return ResponseEntity.ok().body(rental);
+            }else{
+                Map<String, String> response = new HashMap<>();
+                response.put("message","Rental with id:" + id + " not found");
+                return ResponseEntity.ok().body(response);
+            }
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
 
@@ -54,25 +72,36 @@ public class RentalController {
             @RequestParam(value = "picture") MultipartFile picture,
             @RequestParam String description) throws FileNotFoundException {
 
-        Optional<User> connectedUser = userService.getMe(headers);
+        try{
+            Optional<User> connectedUser = userService.getMe(headers);
+            if(connectedUser.isEmpty()){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
 
-        Rental rental = new Rental();
-        rental.setName(name);
-        rental.setSurface(surface);
-        rental.setPrice(price);
-        rental.setDescription(description);
-        rental.setOwner_id(connectedUser.get().getId());
+            Rental rental = new Rental();
+            rental.setName(name);
+            rental.setSurface(surface);
+            rental.setPrice(price);
+            rental.setDescription(description);
+            rental.setOwner_id(connectedUser.get().getId());
 
-        String storedImage = storageService.uploadFile(picture);
-        if(storedImage != null){
-            rental.setPicture(imageBaseUrl+storageService.uploadFile(picture));
-        }else{
-            Map<String, String> response = new HashMap<>();
-            response.put("message","Image format is not valid");
-            return ResponseEntity.badRequest().body(response);
+            String storedImage = storageService.uploadFile(picture);
+            if(storedImage != null){
+                rental.setPicture(imageBaseUrl+storageService.uploadFile(picture));
+            }else{
+                Map<String, String> response = new HashMap<>();
+                response.put("message","Image format is not valid");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            Map<String, String> response = rentalService.create(rental);
+            return ResponseEntity.ok().body(response);
+
+
+
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-
-        return rentalService.create(rental);
 
     }
 
@@ -83,12 +112,17 @@ public class RentalController {
                                     @RequestParam Integer surface,
                                     @RequestParam Integer price,
                                     @RequestParam String description){
-        Rental rental = new Rental();
-        rental.setName(name);
-        rental.setSurface(surface);
-        rental.setPrice(price);
-        rental.setDescription(description);
+       try{
+           Rental rental = new Rental();
+           rental.setName(name);
+           rental.setSurface(surface);
+           rental.setPrice(price);
+           rental.setDescription(description);
 
-        return rentalService.update(id, rental);
+           Map<String, String> response = rentalService.update(id, rental);
+           return ResponseEntity.ok().body(response);
+       }catch(Exception e) {
+           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+       }
     }
 }
