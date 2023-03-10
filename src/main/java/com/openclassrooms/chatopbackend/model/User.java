@@ -23,22 +23,14 @@ public class User implements UserDetails {
 
     private String name;
     private String email;
-
-    @JsonIgnore
     private String password;
-
-
     private LocalDate created_at = LocalDate.now();
-
-
     private LocalDate updated_at = LocalDate.now();
-
     public User(String name, String email, String password){
         this.name = name;
         this.email = email;
         this.password = password;
     }
-
 
     //    Ceci est rajouté pour la config de springSecurity
     @JsonIgnore
