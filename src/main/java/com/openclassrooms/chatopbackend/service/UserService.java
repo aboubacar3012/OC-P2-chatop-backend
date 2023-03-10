@@ -42,6 +42,7 @@ public class UserService implements UserInterface {
     public User register(User user){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        System.out.println(user);
         return userRepository.save(user);
     }
 
